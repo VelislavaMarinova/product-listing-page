@@ -1,10 +1,10 @@
 import useFetch from "../hooks/useFetch"
 
-const ProductList = ({ page, category, limit,sortOption }) => {
+const ProductList = ({ page, category, limit,sortOption,setCanLoadMore }) => {
    console.log(sortOption);
     const url = `http://localhost:3200/products?_embed=reviews&category=${category}&_page=${page}&_limit=${limit}`
     // if(sortOption!=="coose")
-    const { data, totalLengthOfResult, error, isLoading } = useFetch(url);
+    const { data, totalLengthOfResult, error, isLoading } = useFetch(url,setCanLoadMore,limit);
 
     const numTotalPages = Math.ceil(totalLengthOfResult / limit);
     console.log(numTotalPages,"numTotalPages, ");

@@ -50,6 +50,7 @@ const Category = () => {
             page={page}
             limit={limit}
             sortOption={sortOption}
+            setCanLoadMore={setCanLoadMore}
             key={category}
 
         ></ProductLists>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import useFetch from "../hooks/useFetch";
 import ProductList from "./ProductList";
 
-const ProductLists = ({ category, page, limit, sortOption, getTotalPages }) => {
+const ProductLists = ({ category, page, limit, sortOption, getTotalPages,setCanLoadMore }) => {
   const pageArray = Array.from({ length: page }, (_, index) => index + 1);
   console.log(page);
   console.log(pageArray);
@@ -12,6 +12,7 @@ const ProductLists = ({ category, page, limit, sortOption, getTotalPages }) => {
     page={page}
     limit={limit}
     getTotalPages={getTotalPages}
+    setCanLoadMore={setCanLoadMore}
     // passTotalPages={passTotalPages}
     sortOption={sortOption}></ProductList></li>)
 
