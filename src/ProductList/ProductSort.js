@@ -11,7 +11,6 @@ const ProductSort=({setSortOption,sortOption})=>{
                 <option value="price asc">Price asc</option>
                 <option value="price desc">Price desc</option>
             </select>
-           
         </div>
     </div>
     )
