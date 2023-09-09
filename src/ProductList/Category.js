@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ProductLists from "./ProductLists";
 import ProductSort from "./ProductSort";
+import ProductFilter from "./ProductFilter";
+import useFetch from "../hooks/useFetch";
 
 const Category = () => {
     const { category } = useParams()
@@ -9,30 +11,14 @@ const Category = () => {
     const [limit, setLimit] = useState(12);
     const [canLoadMore, setCanLoadMore] = useState(false);
     const [sortOption, setSortOption] = useState('choose');
-    let totalPages = 0
 
-  
- 
+    useEffect(() => {
+        setPage(1)
+    }, [category])
 
-   
-
- 
-   
-    // const passTotalPages = (totalPages) => {
-    //     if (totalPages > page) {
-    //         setCanLoadMore(true)
-    //     } else {
-    //         setCanLoadMore(false)
-    //     }
-
-    // }
 
     const onLoadMore = () => {
         setPage(page => page + 1)
-        console.log(page, "page");
-        if (page === totalPages) {
-            setCanLoadMore(false)
-        }
     }
 
     return (<>
@@ -45,13 +31,14 @@ const Category = () => {
             <option value="24">24 per page</option>
         </select>
         <ProductSort setSortOption={setSortOption} sortOption={sortOption}></ProductSort>
+        <ProductFilter category={category}></ProductFilter>
         <ProductLists
             category={category}
             page={page}
             limit={limit}
             sortOption={sortOption}
             setCanLoadMore={setCanLoadMore}
-            key={category}
+        // key={category}???
 
         ></ProductLists>
         <button onClick={onLoadMore} disabled={!canLoadMore}>Load More</button>

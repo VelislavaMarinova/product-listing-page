@@ -4,8 +4,8 @@ import ProductList from "./ProductList";
 
 const ProductLists = ({ category, page, limit, sortOption, getTotalPages,setCanLoadMore }) => {
   const pageArray = Array.from({ length: page }, (_, index) => index + 1);
-  console.log(page);
-  console.log(pageArray);
+  console.log(page,"ProductLists page");
+  console.log(pageArray,"ProductLists pageArray");
 
   const listWirthProducts = pageArray.map((page, index) => <li key={index}><ProductList
     category={category}
