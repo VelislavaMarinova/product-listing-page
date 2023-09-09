@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Header from "./Header";
 import Home from "./home/Home";
-import Category from "./ProductList/Category";
+import Category from "./productList/Category";
 import Main from "./main/Main";
 import RouteError from "./components/RouteError";
 

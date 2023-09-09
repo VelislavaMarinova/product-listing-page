@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetch = (url) => {
+const useFetch = (url,setCanLoadMore,limit) => {
 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +24,14 @@ const useFetch = (url) => {
             })
             .then((responseData) => {
               setData(responseData);
+              if(limit){
+
+                if(responseData.length < limit){
+                  setCanLoadMore(false)
+                }else{
+                  setCanLoadMore(true)
+                }
+              }
             })
             .catch((err) => {
               setError(err.message || "An error occurred.");
