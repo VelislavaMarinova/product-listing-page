@@ -1,7 +1,7 @@
 import{Route,Routes} from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./Header";
 import useFetch from "./hooks/useFetch";
-import Category from "./components/Category";
+import Category from "./ProductList/Category";
 
 function App() {
   

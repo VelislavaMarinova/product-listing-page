@@ -5,7 +5,7 @@ const useFetch = (url) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [totalLengthofResult, setTotalLengthOfResult] = useState(0)
+    const [totalLengthOfResult, setTotalLengthOfResult] = useState(0)
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -40,7 +40,7 @@ const useFetch = (url) => {
         };
       }, [url]);
     
-      return { data,  setData };
+      return { data,  setData, totalLengthOfResult,isLoading,error };
 
 }
 export default useFetch
