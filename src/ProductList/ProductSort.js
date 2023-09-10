@@ -13,7 +13,7 @@ const ProductSort=({setSortOption,sortOption})=>{
             </select>
         </div>
     </div>
-    )
+    );
     }
     
     export default ProductSort
