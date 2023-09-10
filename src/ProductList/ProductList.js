@@ -1,11 +1,12 @@
 import useFetch from "../hooks/useFetch";
 import Loading from "../components/Loading";
 import LoadingError from "../components/LoadingError";
+import ProductItem from "./ProductItem";
 
 const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, selectedBrand, selectedPrice }) => {
     console.log(sortOption, "ProductList sortOption");
-    let priceMin = 0
-    let priceMax = 0
+    let priceMin = 0;
+    let priceMax = 0;
     let url = `http://localhost:3200/products?_embed=reviews&category=${category}`
     if (sortOption !== "choose") {
         const [sort, order] = sortOption.split(" ");
@@ -14,19 +15,19 @@ const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, select
     console.log(selectedPrice, "selectedPrice");
     if (selectedPrice !== "" && selectedPrice !== "remove filter") {
         if (selectedPrice === "more than 199") {
-            priceMin = selectedPrice.split(" ")[2]
+            priceMin = selectedPrice.split(" ")[2];
             priceMax = 1000;
         } else {
-            priceMin = selectedPrice.split("-")[0]
-            priceMax = selectedPrice.split("-")[1]
+            priceMin = selectedPrice.split("-")[0];
+            priceMax = selectedPrice.split("-")[1];
         }
-        url += `&price_gte=${priceMin}&price_lte=${priceMax}`
+        url += `&price_gte=${priceMin}&price_lte=${priceMax}`;
     }
     if (selectedBrand !== "" && selectedBrand !== "remove filter") {
 
-        url += `&brand=${selectedBrand}`
+        url += `&brand=${selectedBrand}`;
     }
-    url = url + `&_page=${page}&_limit=${limit}`
+    url = url + `&_page=${page}&_limit=${limit}`;
     const { data, error, isLoading } = useFetch(url, setCanLoadMore, limit);
 
     if (isLoading) {
@@ -39,12 +40,8 @@ const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, select
     console.log(data);
 
     return (
-        <ul>{data.map((p, index) => <li key={index}>
-            <p>{p.id}. {p.title}</p>
-            <p>Price: {p.price}</p>
-            <p>discountPercentage: {p.discountPercentage}%</p>
-            <p>{p.brand}</p>
-            {/* <img src={p.thumbnail} alt={p.title} /> */}
+        <ul>{data.map((product) => <li key={product.id}>
+          <ProductItem product={product}></ProductItem>
         </li>)}
         </ul>
     );

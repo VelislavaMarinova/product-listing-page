@@ -1,5 +1,3 @@
-import { useState } from "react";
-import useFetch from "../hooks/useFetch";
 import ProductList from "./ProductList";
 
 const ProductLists = ({ category, page, limit, sortOption, getTotalPages,setCanLoadMore, selectedBrand,selectedPrice }) => {
