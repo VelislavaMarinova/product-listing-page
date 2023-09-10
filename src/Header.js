@@ -1,9 +1,19 @@
 import useFetch from "./hooks/useFetch";
 import { Link } from 'react-router-dom';
+import Loading from "./components/Loading";
+import LoadingError from "./components/LoadingError";
 
 const Headr = () => {
-  const { data } = useFetch('http://localhost:3200/categories')
+  const { data, isLoading, error } = useFetch('http://localhost:3200/categories')
   console.log(data);
+
+  if (isLoading) {
+    return <Loading />
+  }
+
+  if (error) {
+    return <LoadingError value={error.message} />
+  }
 
   return (
     <div>
@@ -16,6 +26,6 @@ const Headr = () => {
         <li>No categories available</li>
       )}</ul>
     </div>
-  )
-}
+  );
+};
 export default Headr
