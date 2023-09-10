@@ -5,6 +5,7 @@ import Home from "./home/Home";
 import Category from "./productList/Category";
 import Main from "./main/Main";
 import RouteError from "./components/RouteError";
+import Footer from "./footer/Footer";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="*" element={<RouteError></RouteError>}></Route>
         </Routes>
       </Main>
+      <Footer/>
 
     </>
 
