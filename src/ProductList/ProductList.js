@@ -1,4 +1,6 @@
-import useFetch from "../hooks/useFetch"
+import useFetch from "../hooks/useFetch";
+import Loading from "../components/Loading";
+import LoadingError from "../components/LoadingError";
 
 const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, selectedBrand, selectedPrice }) => {
     console.log(sortOption, "ProductList sortOption");
@@ -14,30 +16,37 @@ const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, select
         if (selectedPrice === "more than 199") {
             priceMin = selectedPrice.split(" ")[2]
             priceMax = 1000;
-        }  else {
+        } else {
             priceMin = selectedPrice.split("-")[0]
             priceMax = selectedPrice.split("-")[1]
         }
         url += `&price_gte=${priceMin}&price_lte=${priceMax}`
     }
-    if (selectedBrand !== "" && selectedBrand!=="remove filter") {
-        
+    if (selectedBrand !== "" && selectedBrand !== "remove filter") {
+
         url += `&brand=${selectedBrand}`
     }
     url = url + `&_page=${page}&_limit=${limit}`
     const { data, error, isLoading } = useFetch(url, setCanLoadMore, limit);
 
-
+    if (isLoading) {
+        return <Loading />
+    }
+    if (error) {
+        return <LoadingError value={error.message} />
+    }
 
     console.log(data);
+
     return (
         <ul>{data.map((p, index) => <li key={index}>
             <p>{p.id}. {p.title}</p>
-        <p>Price: {p.price}</p>
-        <p>discountPercentage: {p.discountPercentage}%</p>
-        <p>{p.brand}</p>
-        {/* <img src={p.thumbnail} alt={p.title} /> */}
-            </li>)}</ul>
-    )
-}
-export default ProductList
+            <p>Price: {p.price}</p>
+            <p>discountPercentage: {p.discountPercentage}%</p>
+            <p>{p.brand}</p>
+            {/* <img src={p.thumbnail} alt={p.title} /> */}
+        </li>)}
+        </ul>
+    );
+};
+export default ProductList;
