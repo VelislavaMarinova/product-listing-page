@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import ProductLists from "./ProductLists";
 import ProductSort from "./ProductSort";
 import ProductFilter from "./ProductFilter";
-import useFetch from "../hooks/useFetch";
 
 const Category = () => {
     const { category } = useParams()
@@ -11,10 +10,12 @@ const Category = () => {
     const [limit, setLimit] = useState(12);
     const [canLoadMore, setCanLoadMore] = useState(false);
     const [sortOption, setSortOption] = useState('choose');
+    const [selectedPrice, setSelectedPrice] = useState('');
+    const [selectedBrand, setSelectedBrand] = useState('');
 
     useEffect(() => {
         setPage(1)
-    }, [category])
+    }, [category,selectedPrice,selectedBrand])
 
 
     const onLoadMore = () => {
@@ -31,13 +32,21 @@ const Category = () => {
             <option value="24">24 per page</option>
         </select>
         <ProductSort setSortOption={setSortOption} sortOption={sortOption}></ProductSort>
-        <ProductFilter category={category}></ProductFilter>
+        <ProductFilter
+            category={category}
+            selectedPrice={selectedPrice}
+            setSelectedPrice={setSelectedPrice}
+            selectedBrand={selectedBrand}
+            setSelectedBrand={setSelectedBrand}
+        ></ProductFilter>
         <ProductLists
             category={category}
             page={page}
             limit={limit}
             sortOption={sortOption}
             setCanLoadMore={setCanLoadMore}
+            selectedBrand={selectedBrand}
+            selectedPrice={selectedPrice}
         // key={category}???
 
         ></ProductLists>
