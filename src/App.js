@@ -6,6 +6,7 @@ import Category from "./productList/Category";
 import Main from "./main/Main";
 import RouteError from "./components/RouteError";
 import Footer from "./footer/Footer";
+import ProductDetails from "./productList/ProductDetails";
 
 function App() {
 
@@ -14,9 +15,10 @@ function App() {
       <Header></Header>
       <Main>
         <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/categories/:category" element={<Category></Category>}></Route>
-          <Route path="*" element={<RouteError></RouteError>}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/categories/:category" element={<Category/>}></Route>
+          <Route path="/categories/:category/:id" element={<ProductDetails />}></Route>
+          <Route path="*" element={<RouteError />}></Route>
         </Routes>
       </Main>
       <Footer/>
