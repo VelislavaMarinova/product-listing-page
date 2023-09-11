@@ -13,7 +13,7 @@ const ProductItem = ({ product }) => {
 
     </Link>
         <button>Add to cart</button>
-        <p className="product-login"><Link to="/auth/login">Login</Link> to enable the button!</p>
+      {/* <p className="product-login"><Link to="/auth/login">Login</Link> to enable the button!</p> */}
     </div>
     )
 
