@@ -3,7 +3,7 @@ const StarRating = ({ reviews }) => {
     let goldStars = []
     let blueStars = Array(5).fill(null)
     let productRating = 0
-    if (reviews.length) {
+    if (reviews && reviews.length!==0) {
 
         const sumAllProducRatings =reviews.reduce((currentRating, review) => {
             return currentRating + review.rating
