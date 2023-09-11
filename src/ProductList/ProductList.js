@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import useFetch from "../hooks/useFetch";
 import Loading from "../components/Loading";
 import LoadingError from "../components/LoadingError";
@@ -28,7 +29,12 @@ const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, select
         url += `&brand=${selectedBrand}`;
     }
     url = url + `&_page=${page}&_limit=${limit}`;
-    const { data, error, isLoading } = useFetch(url, setCanLoadMore, limit);
+
+    const onSuccess = useCallback((data = []) => {
+        setCanLoadMore(data.length === limit)
+    }, [limit, setCanLoadMore])
+
+    const { data, error, isLoading } = useFetch(url,{onSuccess});
 
     if (isLoading) {
         return <Loading />
@@ -41,7 +47,7 @@ const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, select
 
     return (
         <ul>{data.map((product) => <li key={product.id}>
-          <ProductItem product={product}></ProductItem>
+            <ProductItem product={product}></ProductItem>
         </li>)}
         </ul>
     );

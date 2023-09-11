@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetch = (url, setCanLoadMore, limit) => {
+const useFetch = (url, options = {}) => {
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,13 +24,16 @@ const useFetch = (url, setCanLoadMore, limit) => {
         })
         .then((responseData) => {
           setData(responseData);
-          if (limit) {
-            if (responseData.length < limit) {
-              setCanLoadMore(false)
-            } else {
-              setCanLoadMore(true)
-            }
+          if (options.onSuccess !== undefined) {
+            options.onSuccess(responseData)
           }
+          // if (limit) {
+          //   if (responseData.length < limit) {
+          //     setCanLoadMore(false)
+          //   } else {
+          //     setCanLoadMore(true)
+          //   }
+          // }
         })
         .catch((err) => {
           setError(err.message || "An error occurred.");
@@ -45,7 +48,7 @@ const useFetch = (url, setCanLoadMore, limit) => {
     return () => {
       abortController.abort();
     };
-  }, [url]);
+  }, [options.onSuccess, url]);
 
   return { data, setData, isLoading, error };
 
