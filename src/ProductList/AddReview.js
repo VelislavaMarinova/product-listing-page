@@ -1,3 +1,4 @@
+
 const AddReview=({product})=>{
 return(
     <section>
@@ -7,10 +8,9 @@ return(
             <label htmlFor="rating">Rate:</label>
             <select
                 id="rating"
-                formControlName="rating"
             >
                 <option
-                    value="choose"
+                    value={"choose"}
                     disabled
                 >Choose rating</option>
                 <option value="1">⭐</option>
@@ -21,9 +21,9 @@ return(
             </select>
             
         </div>
-        <div class="add-review-review">
+        <div >
 
-            <label for="review">Add review:</label>
+            <label htmlFor="review">Add review:</label>
             <textarea
                 name=""
                 id="review"
@@ -31,7 +31,7 @@ return(
                 rows="10"
             ></textarea>
         </div>
-        <button type="submit" class="add-review-btn">Add review</button>
+        <button type="submit">Add review</button>
     </form>
 </section>
 )
