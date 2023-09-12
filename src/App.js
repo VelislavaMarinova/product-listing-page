@@ -9,6 +9,7 @@ import RouteError from "./components/RouteError";
 import Footer from "./footer/Footer";
 import ProductDetails from "./productList/ProductDetails";
 import Cart from "./cart/Cart";
+import CartProvider from "./store/cartProvider";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -19,7 +20,7 @@ function App() {
     setShowCart(true)
   }
   return (
-    <>
+    <CartProvider>
       {showCart && <Cart onHideCart={hideCartHandler}></Cart>}
       <Header onShowCart={showCartHandler} />
       <Main>
@@ -31,8 +32,10 @@ function App() {
         </Routes>
       </Main>
       <Footer />
+    </CartProvider>
 
-    </>
+
+
 
   );
 }

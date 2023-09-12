@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import StarRating from "./StarRating";
 import styles from "./ProductItem.module.css";
+import ProductItemForm from "./ProductItemForm";
 const ProductItem = ({ product }) => {
 
     return (<div className={styles.product}> <Link to={`/categories/${product.category}/${product.id}`} >
@@ -12,7 +13,7 @@ const ProductItem = ({ product }) => {
         {/* <img src={p.thumbnail} alt={p.title} /> */}
 
     </Link>
-        <button>Add to cart</button>
+       <ProductItemForm></ProductItemForm>
       {/* <p className="product-login"><Link to="/auth/login">Login</Link> to enable the button!</p> */}
     </div>
     )
