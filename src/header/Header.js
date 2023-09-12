@@ -4,7 +4,7 @@ import Loading from "../components/Loading";
 import LoadingError from "../components/LoadingError";
 import HeaderCartButton from "./HeaderCartButton";
 
-const Headr = (props) => {
+const Headr = ({onShowCart}) => {
   const { data, isLoading, error } = useFetch('http://localhost:3200/categories')
   console.log(data);
 
@@ -21,7 +21,7 @@ const Headr = (props) => {
       <div >
         <div ><Link to={'/'}>Timeless<strong>Trends</strong></Link></div>
         <ul >
-          <li ><HeaderCartButton onClick={props.onShowCart}/></li>
+          <li ><HeaderCartButton onClick={onShowCart}/></li>
           <li  ><i className="fa-solid fa-user"></i><span > Welcomeusername</span></li>
           <li ><Link to="/auth/login">Login</Link></li>
           <li ><Link to="/auth/register">Register</Link></li>

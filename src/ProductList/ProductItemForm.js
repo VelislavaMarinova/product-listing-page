@@ -1,10 +1,30 @@
+import { useRef,useState } from "react";
+
 import Input from "../ui/Inpiut";
 
-const ProductItemForm =()=>{
+const ProductItemForm = ({onAddToCart}) => {
+    const[amountIsValid,setAmountIsValid]=useState(true);
+    const amountInputRef = useRef()
 
-    return  (
-        <form >
-            <Input label="Amount"
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const enteredAmount = amountInputRef.current.value;
+        const enteredAmountNumber = + enteredAmount;
+        if(
+            enteredAmount.trim().length === 0 || 
+            enteredAmountNumber<1 || 
+            enteredAmountNumber>5){
+                setAmountIsValid(false);
+            return
+        }
+        onAddToCart(enteredAmountNumber)
+
+    }
+    return (
+        <form onSubmit={submitHandler}>
+            <Input
+                ref={amountInputRef}
+                label="Amount"
                 input={{
                     id: 'amount',
                     type: 'number',
@@ -14,6 +34,7 @@ const ProductItemForm =()=>{
                     defaultValue: '1'
                 }} />
             <button>+ Add to cart</button>
+            {!amountIsValid && <p>Please enter a valid amount (1-5)</p>}
         </form>
     )
 
