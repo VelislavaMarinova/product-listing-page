@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import useFetch from "../hooks/useFetch";
 import StarRating from "./StarRating";
 import ProductReviews from "./ProductReviews";
 import AddReview from "./AddReview";
+import ProductItemForm from "./ProductItemForm";
+import CartContext from "../store/cart-context";
 
 const ProductDetails = () => {
     const { id } = useParams();
     const [showReview, setShowReview] = useState(false);
     const [showAddReview, setShowAddReview] = useState(false);
+    const cartCtx=useContext(CartContext);
     console.log(id);
     const url = `http://localhost:3200/products/${id}?_embed=reviews`
     const { data, isLoading, error } = useFetch(url);
@@ -21,6 +24,15 @@ const ProductDetails = () => {
     const onAddReview = () => {
         setShowAddReview(prev => !prev)
     }
+    const addToCartHandler = (amount) => {
+        cartCtx.addItem({
+            id: data.id,
+            name: data.title,
+            amount: amount,
+            price: data.price
+        })
+    }
+
     console.log(showReview);
     return <div>
         <p>Product {data.title}</p>
@@ -29,6 +41,7 @@ const ProductDetails = () => {
         <p>discountPercentage: {data.discountPercentage}</p>
         <img src={data.thumbnail} alt={data.title} />
         <StarRating reviews={data.reviews} />
+        <ProductItemForm onAddToCart={addToCartHandler} />
         <button onClick={onToggleReviews}>{showReview ? 'Hide Review' : 'Show reviews'}</button>
         <button onClick={onAddReview}>Add review</button>
         {showReview && <ProductReviews reviews={data.reviews}></ProductReviews>}
