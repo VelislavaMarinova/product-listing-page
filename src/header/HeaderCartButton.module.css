@@ -1,4 +1,4 @@
-/* .button {
+.button {
     cursor: pointer;
     font: inherit;
     border: none;
@@ -56,4 +56,4 @@
     100% {
       transform: scale(1);
     }
-  } */
+  }
