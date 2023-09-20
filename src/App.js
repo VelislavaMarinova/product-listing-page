@@ -10,6 +10,8 @@ import Footer from "./footer/Footer";
 import ProductDetails from "./productList/ProductDetails";
 import Cart from "./cart/Cart";
 import CartProvider from "./store/cartProvider";
+import Signin from "./signin/Signin";
+import Signup from "./signup/Signup";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -26,6 +28,8 @@ function App() {
       <Main>
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/auth/signin" element={<Signin/>}/>
+          <Route path="/auth/signup" element={<Signup/>}></Route>
           <Route path="/categories/:category" element={<Category />}></Route>
           <Route path="/categories/:category/:id" element={<ProductDetails />}></Route>
           <Route path="*" element={<RouteError />}></Route>

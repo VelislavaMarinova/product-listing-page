@@ -23,8 +23,8 @@ const Headr = ({onShowCart}) => {
         <ul >
           <li ><HeaderCartButton onClick={onShowCart}/></li>
           <li  ><i className="fa-solid fa-user"></i><span > Welcomeusername</span></li>
-          <li ><Link to="/auth/login">Login</Link></li>
-          <li ><Link to="/auth/register">Register</Link></li>
+          <li ><Link to="/auth/signin">Sign In</Link></li>
+          <li ><Link to="/auth/signup">Sign Up</Link></li>
           <li ><button >Logout</button></li>
         </ul>
       </div>
