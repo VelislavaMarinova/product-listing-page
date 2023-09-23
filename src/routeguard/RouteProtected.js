@@ -1,15 +1,15 @@
 import NotAuthorized from '../notAutorized/NotAuthorized'
-import { useAuthContext } from '../../contexts/AuthContext'
+import { useAuth } from '../store/auth-context'
 
 const RouteProtected = ({ children }) => {
-  const {isAuthenticated} = useAuthContext()
+  const {auth} = useAuth()
 
-  if(!isAuthenticated){
+  if(!auth){
 
     return <NotAuthorized />
   }
 
-  return children
+  return children;
 }
 
 export default RouteProtected;

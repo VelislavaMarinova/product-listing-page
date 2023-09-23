@@ -14,7 +14,7 @@ const ProductDetails = () => {
     const [showReview, setShowReview] = useState(false);
     const [showAddReview, setShowAddReview] = useState(false);
     const cartCtx=useContext(CartContext);
-    const {auth}=useAuth
+    const {auth}=useAuth()
     console.log(id);
     const url = `http://localhost:3200/products/${id}?_embed=reviews`
     const { data, isLoading, error } = useFetch(url);
