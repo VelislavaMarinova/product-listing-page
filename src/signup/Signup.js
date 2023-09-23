@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import TextField from "../ui/TextField";
 import { useAuth } from "../store/auth-context";
@@ -10,7 +10,11 @@ const Signup = () => {
     const { signup } = useAuth();
     const [error, setError] = useState('');
     const [isLoading, setIsloading] = useState(false);
-    const navigate=useNavigate();
+    const [checkPrivacy, setCheckPrivacy] = useState(false);
+    const [checkPrivacyHasError, setCheckPrivacyHasError] = useState(false);
+
+
+    const navigate = useNavigate();
     const {
         value: enetredUsername,
         isValid: enteredUsernameIsValid,
@@ -47,13 +51,18 @@ const Signup = () => {
         reset: resetRePassword
     } = useForm(value => value);
 
+    const onCheckPrivacy = () => {
+        setCheckPrivacy(previousState => !previousState)
+    }
+
     let formIsValid = false;
 
     if (
         enteredUsernameIsValid &&
         enteredEmailIsValid &&
         enteredPasswordIsValid &&
-        enteredRePasswordIsValid
+        enteredRePasswordIsValid &&
+        checkPrivacy
     ) {
         formIsValid = true;
     }
@@ -61,10 +70,16 @@ const Signup = () => {
     const formSubmitHandler = async (e) => {
         e.preventDefault();
         console.log(enetredEmail, enetredUsername);
+
+
         if (!formIsValid) {
+            if (!checkPrivacy) {
+                setCheckPrivacyHasError(true)
+            }
             console.log('not valid');
             return setError('Form is not valid')
         }
+
         if (enetredPassword !== enetredRePassword) {
 
             return setError('Passwords don`t match')
@@ -138,9 +153,14 @@ const Signup = () => {
                 value={enetredRePassword}
             />
             {rePasswordHasError && (<p className="error-text">pass error</p>)}
+            <TextField
+                label="I agree to the Privacy Policy."
+                type="checkbox"
+                checked={checkPrivacy}
+                onChange={onCheckPrivacy}
+            />
+            {checkPrivacyHasError &&  (<p className="error-text">Pleace check Provacy Policy!</p>)}
 
-            <input type="checkbox" />
-            <label htmlFor="">I agree to the Privacy Policy.</label>
             <button disabled={isLoading} type="submit">Sign Up</button>
             <p>Alredy have an account?</p>
             <Link to="/auth/signin">Sign In</Link>
