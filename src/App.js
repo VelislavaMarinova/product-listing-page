@@ -12,6 +12,7 @@ import Cart from "./cart/Cart";
 import CartProvider from "./store/cartProvider";
 import Signin from "./signin/Signin";
 import Signup from "./signup/Signup";
+import { AuthProvider } from "./store/auth-context";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -22,6 +23,7 @@ function App() {
     setShowCart(true)
   }
   return (
+    <AuthProvider>
     <CartProvider>
       {showCart && <Cart onHideCart={hideCartHandler}></Cart>}
       <Header onShowCart={showCartHandler} />
@@ -37,6 +39,7 @@ function App() {
       </Main>
       <Footer />
     </CartProvider>
+    </AuthProvider>
 
 
 
