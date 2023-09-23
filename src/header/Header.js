@@ -1,10 +1,14 @@
 import useFetch from "../hooks/useFetch";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Loading from "../components/Loading";
 import LoadingError from "../components/LoadingError";
 import HeaderCartButton from "./HeaderCartButton";
+import { useAuth } from "../store/auth-context";
 
 const Headr = ({onShowCart}) => {
+  const {auth, logout}=useAuth();
+  console.log(auth,'auth');
+  const navigate = useNavigate();
   const { data, isLoading, error } = useFetch('http://localhost:3200/categories')
   console.log(data);
 
@@ -16,16 +20,26 @@ const Headr = ({onShowCart}) => {
     return <LoadingError value={error.message} />
   }
 
+const onLogoutHandler=()=>{
+logout();
+navigate('/');
+}
+
   return (<>
     <div >
       <div >
         <div ><Link to={'/'}>Timeless<strong>Trends</strong></Link></div>
         <ul >
-          <li ><HeaderCartButton onClick={onShowCart}/></li>
-          <li  ><i className="fa-solid fa-user"></i><span > Welcomeusername</span></li>
-          <li ><Link to="/auth/login">Login</Link></li>
-          <li ><Link to="/auth/register">Register</Link></li>
-          <li ><button >Logout</button></li>
+          { auth && <li ><HeaderCartButton onClick={onShowCart}/></li>}
+          
+          {auth &&  <li  ><i className="fa-solid fa-user"></i><span > Welcome <strong>{auth.user.username}</strong></span></li>}
+         {!auth && <li ><Link to="/auth/signin">Sign In</Link></li>}
+         {!auth && <li ><Link to="/auth/signup">Sign Up</Link></li>}
+        
+          
+          
+          {auth &&  <li ><button variant="link" onClick={onLogoutHandler}>Logout</button></li> }
+         
         </ul>
       </div>
     </div>

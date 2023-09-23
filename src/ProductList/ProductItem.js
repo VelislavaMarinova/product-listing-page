@@ -5,8 +5,11 @@ import StarRating from "./StarRating";
 import styles from "./ProductItem.module.css";
 import ProductItemForm from "./ProductItemForm";
 import CartContext from "../store/cart-context";
+import { useAuth } from "../store/auth-context";
 const ProductItem = ({ product }) => {
+
     const cartCtx = useContext(CartContext);
+    const {auth}=useAuth()
 
     const addToCartHandler = (amount) => {
         cartCtx.addItem({ 
@@ -26,7 +29,8 @@ const ProductItem = ({ product }) => {
         {/* <img src={p.thumbnail} alt={p.title} /> */}
 
     </Link>
-        <ProductItemForm onAddToCart={addToCartHandler}></ProductItemForm>
+        {auth &&  <ProductItemForm onAddToCart={addToCartHandler}></ProductItemForm>}
+     
         {/* <p className="product-login"><Link to="/auth/login">Login</Link> to enable the button!</p> */}
     </div>
     )
