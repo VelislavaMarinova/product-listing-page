@@ -4,8 +4,6 @@ import useForm from "../hooks/useForm";
 import TextField from "../ui/TextField";
 import { useAuth } from "../store/auth-context";
 
-
-
 const Signup = () => {
     const { signup } = useAuth();
     const [error, setError] = useState('');
@@ -13,8 +11,8 @@ const Signup = () => {
     const [checkPrivacy, setCheckPrivacy] = useState(false);
     const [checkPrivacyHasError, setCheckPrivacyHasError] = useState(false);
 
-
     const navigate = useNavigate();
+
     const {
         value: enetredUsername,
         isValid: enteredUsernameIsValid,
@@ -167,4 +165,5 @@ const Signup = () => {
         </form>
     );
 };
+
 export default Signup;

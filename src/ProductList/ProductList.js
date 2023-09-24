@@ -8,7 +8,7 @@ const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, select
     console.log(sortOption, "ProductList sortOption");
     let priceMin = 0;
     let priceMax = 0;
-    let url = `http://localhost:3200/products?_embed=reviews&category=${category}`
+    let url = `http://localhost:3200/products?_embed=reviews&category=${category}`;
     if (sortOption !== "choose") {
         const [sort, order] = sortOption.split(" ");
         url += `&_sort=${sort}&_order=${order}`
@@ -34,16 +34,15 @@ const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, select
         setCanLoadMore(data.length === limit)
     }, [limit, setCanLoadMore])
 
-    const { data, error, isLoading } = useFetch(url,{onSuccess});
+    const { data, error, isLoading } = useFetch(url, { onSuccess });
 
     if (isLoading) {
         return <Loading />
     }
+    
     if (error) {
         return <LoadingError value={error.message} />
     }
-
-    console.log(data);
 
     return (
         <ul>{data.map((product) => <li key={product.id}>
@@ -52,4 +51,5 @@ const ProductList = ({ page, category, limit, sortOption, setCanLoadMore, select
         </ul>
     );
 };
+
 export default ProductList;

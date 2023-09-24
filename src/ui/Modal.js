@@ -23,5 +23,6 @@ const Modal = (props) => {
             <ModalOverlay>{props.children}</ModalOverlay> */}
         </>
     )
-}
+};
+
 export default Modal;

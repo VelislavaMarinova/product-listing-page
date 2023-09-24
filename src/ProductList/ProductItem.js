@@ -26,15 +26,10 @@ const ProductItem = ({ product }) => {
         <p>discountPercentage: {product.discountPercentage}%</p>
         <p>{product.brand}</p>
         <StarRating reviews={product.reviews} />
-        {/* <img src={p.thumbnail} alt={p.title} /> */}
-
     </Link>
         {auth &&  <ProductItemForm onAddToCart={addToCartHandler}></ProductItemForm>}
-     
-        {/* <p className="product-login"><Link to="/auth/login">Login</Link> to enable the button!</p> */}
     </div>
     )
+};
 
-
-}
 export default ProductItem;

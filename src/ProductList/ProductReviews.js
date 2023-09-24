@@ -4,7 +4,6 @@ const ProductReviews=({reviews, userHasAddedReview})=>{
     }
    
         return <div>No reviews added!</div>
+};
 
-
-}
 export default ProductReviews;

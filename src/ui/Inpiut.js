@@ -7,5 +7,6 @@ const Input = React.forwardRef((props, ref) => {
         <input ref={ref} {...props.input} />
     </div>
     );
-})
+});
+
 export default Input;

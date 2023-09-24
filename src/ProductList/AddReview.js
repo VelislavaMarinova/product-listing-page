@@ -4,10 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import useFetch from "../hooks/useFetch";
 import { useAuth } from "../store/auth-context";
+import Loading from "../components/Loading";
+import LoadingError from "../components/LoadingError";
 
-const AddReview = ({
-
-}) => {
+const AddReview = () => {
     const [error, setError] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const { category, id } = useParams();
@@ -56,39 +56,31 @@ const AddReview = ({
             userId: auth.user.id,
             username: auth.user.username
         }
-        try {
-            setError('');
-            setIsLoading(true)
-            fetch('http://localhost:3200/reviews', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer" + auth.accessToken
-                },
-                body: JSON.stringify(body)
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Something went wrong");
-                    }
 
-                    // setTotalLengthOfResult(response.headers.get("X-Total-Count"));
-                    return response.json();
-                })
-                .then((response) => {
-                    // setCurrentUser(user);
-                    // setToken(user)
-                    // console.log(user, "response");
-                    console.log(response);
-                })
-                .catch((err) => {
-                    console.log("error");
-                    // setError(err.message || "An error occurred.");
-                })
-            // navigate('/')
-        } catch (error) {
-            setError('Failed to create an account')
-        }
+        setError('');
+        setIsLoading(true)
+        fetch('http://localhost:3200/reviews', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer" + auth.accessToken
+            },
+            body: JSON.stringify(body)
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Something went wrong");
+                }
+                return response.json();
+            })
+            // .then((response) => {
+            //     console.log(response);
+            // })
+            .catch((err) => {
+                setError(err.message || "An error occurred.");
+            })
+        // navigate('/')
+
         setIsLoading(false)
 
         console.log(stars);
@@ -96,9 +88,14 @@ const AddReview = ({
         setEnteredValue('choose');
         resetReview();
         navigate(`/categories/${data.category}/${data.id}`)
-
     }
 
+    if (isLoading) {
+        return <Loading />
+    }
+    if(error){
+        return <LoadingError/>
+    }
 
     return (
         <section>
@@ -137,5 +134,6 @@ const AddReview = ({
             </form>
         </section>
     )
-}
-export default AddReview
+};
+
+export default AddReview;

@@ -1,14 +1,13 @@
-import { useState } from "react";
 import useFetch from "../hooks/useFetch";
 
 const ProductFilter = ({ category,selectedBrand,setSelectedBrand,selectedPrice,setSelectedPrice }) => {
-  
 
-    const url = `http://localhost:3200/products?category=${category}`
+    const url = `http://localhost:3200/products?category=${category}`;
 
     const { data } = useFetch(url);
 
     const uniqueBrands = [...new Set(data.map(product => product.brand))];
+
     uniqueBrands.push('remove filter')
 
     const priceRanges = ["0-49", "50-99", "100-149", "150-199", "more than 199", "remove filter"]
@@ -19,8 +18,6 @@ const ProductFilter = ({ category,selectedBrand,setSelectedBrand,selectedPrice,s
     const onFilterByBrandChange =(e)=>{
         setSelectedBrand(e.target.value)
     }
-    console.log(selectedPrice);
-    console.log(selectedBrand);
 
     return (
         <div>
@@ -45,8 +42,8 @@ const ProductFilter = ({ category,selectedBrand,setSelectedBrand,selectedPrice,s
                         onChange={onFilterByBrandChange}
                     /><label htmlFor={brand + "brand"}>{brand}</label></div>)}
                 </div>
-          
         </div>
     )
-}
+};
+
 export default ProductFilter;

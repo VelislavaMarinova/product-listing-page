@@ -8,6 +8,6 @@ const TextField = ({ styles,label, component: Component = 'input', ...rest }) =>
         </label>
       </div>
     )
-  }
+  };
   
-  export default TextField
+  export default TextField;

@@ -47,11 +47,11 @@ const Category = () => {
             setCanLoadMore={setCanLoadMore}
             selectedBrand={selectedBrand}
             selectedPrice={selectedPrice}
-        // key={category}???
 
         ></ProductLists>
         <button onClick={onLoadMore} disabled={!canLoadMore}>Load More</button>
     </>
     )
-}
+};
+
 export default Category;
