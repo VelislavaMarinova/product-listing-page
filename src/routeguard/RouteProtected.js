@@ -1,4 +1,4 @@
-import NotAuthorized from '../notAutorized/NotAuthorized'
+import NotAuthorized from './NotAuthorized'
 import { useAuth } from '../store/auth-context'
 
 const RouteProtected = ({ children }) => {
@@ -10,6 +10,6 @@ const RouteProtected = ({ children }) => {
   }
 
   return children;
-}
+};
 
 export default RouteProtected;

@@ -4,7 +4,7 @@ import Input from "../ui/Inpiut";
 
 const ProductItemForm = ({onAddToCart}) => {
     const[amountIsValid,setAmountIsValid]=useState(true);
-    const amountInputRef = useRef()
+    const amountInputRef = useRef();
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -17,7 +17,7 @@ const ProductItemForm = ({onAddToCart}) => {
                 setAmountIsValid(false);
             return
         }
-        onAddToCart(enteredAmountNumber)
+        onAddToCart(enteredAmountNumber);
 
     }
     return (
@@ -37,6 +37,6 @@ const ProductItemForm = ({onAddToCart}) => {
             {!amountIsValid && <p>Please enter a valid amount (1-5)</p>}
         </form>
     )
+};
 
-}
-export default ProductItemForm
+export default ProductItemForm;

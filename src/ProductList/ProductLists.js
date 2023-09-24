@@ -18,5 +18,6 @@ const ProductLists = ({ category, page, limit, sortOption, getTotalPages,setCanL
 
   return (<ul>{listWirthProducts}</ul>)
 
-}
+};
+
 export default ProductLists;

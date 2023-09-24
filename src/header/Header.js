@@ -11,6 +11,10 @@ const Headr = ({onShowCart}) => {
   const navigate = useNavigate();
   const { data, isLoading, error } = useFetch('http://localhost:3200/categories')
   console.log(data);
+  const onLogoutHandler=()=>{
+  logout();
+  navigate('/');
+  }
 
   if (isLoading) {
     return <Loading />
@@ -19,11 +23,6 @@ const Headr = ({onShowCart}) => {
   if (error) {
     return <LoadingError value={error.message} />
   }
-
-const onLogoutHandler=()=>{
-logout();
-navigate('/');
-}
 
   return (<>
     <div >
@@ -35,9 +34,6 @@ navigate('/');
           {auth &&  <li  ><i className="fa-solid fa-user"></i><span > Welcome <strong>{auth.user.username}</strong></span></li>}
          {!auth && <li ><Link to="/auth/signin">Sign In</Link></li>}
          {!auth && <li ><Link to="/auth/signup">Sign Up</Link></li>}
-        
-          
-          
           {auth &&  <li ><button variant="link" onClick={onLogoutHandler}>Logout</button></li> }
          
         </ul>
@@ -56,4 +52,5 @@ navigate('/');
   </>
   );
 };
-export default Headr
+
+export default Headr;

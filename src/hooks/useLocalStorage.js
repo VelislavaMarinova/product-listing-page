@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
  const useLocalStorage = (key, defaultValue) => {
+    //The initializer function is used as an argument to useState. This function is executed once when the component is first rendered.
     const [value, setValue] = useState(() => {
         const storedData = localStorage.getItem(key);
 

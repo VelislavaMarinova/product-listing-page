@@ -1,4 +1,4 @@
 const RouteError=()=>{
-return <div>page not found</div>
+return <div>Page not found!</div>
 }
 export default RouteError;

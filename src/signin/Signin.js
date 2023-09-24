@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TextField from "../ui/TextField";
 import useForm from "../hooks/useForm";
 import { useAuth } from "../store/auth-context";
 
 const Signin = () => {
-    const { signin,err } = useAuth();
+    const { signin, err } = useAuth();
     const [error, setError] = useState('');
     const [isLoading, setIsloading] = useState(false);
-    const navigate=useNavigate()
+    const navigate = useNavigate();
 
     const {
         value: enteredEmailInput,
@@ -55,7 +55,7 @@ const Signin = () => {
         setIsloading(false);
         resetEmilInput();
         resetPasswordInput();
-    }
+    };
 
     const emialInputStyles = emailHasError ? "form-control invalid" : "form-control";
     const passwordInputStyles = passwordHasError ? "form-control invalid" : "form-control";
@@ -92,6 +92,7 @@ const Signin = () => {
         <button disabled={isLoading} type="submit">Sign In</button>
         <Link to="/auth/signup">Create Account</Link>
     </form>
-    )
-}
+    );
+};
+
 export default Signin;

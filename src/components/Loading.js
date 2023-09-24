@@ -1,5 +1,7 @@
-const Loading=({message})=>{
-    if(message){
+
+const Loading = ({message}) => {
+    console.log('loading');
+    if (message) {
         return <div>{message}</div>
     }
     return <div>Loading...</div>
