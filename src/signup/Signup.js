@@ -120,7 +120,7 @@ const Signup = () => {
                 onBlur={usernameBlurHandler}
                 value={enetredUsername}
             />
-            {usernameHasError && (<p className="error-text">Name must not be empty</p>)}
+            {usernameHasError && (<p className="error-text">Please enter a valid username!</p>)}
             <TextField
                 styles={emialInputStyles}
                 label="User email:"
@@ -130,7 +130,7 @@ const Signup = () => {
                 onBlur={emailBlurHandler}
                 value={enetredEmail}
             />
-            {emailHasError && (<p className="error-text">Email error</p>)}
+            {emailHasError && (<p className="error-text">Please enter a valid email!</p>)}
 
             <TextField
                 styles={passwordInputStyles}
@@ -141,7 +141,7 @@ const Signup = () => {
                 onBlur={passwordBlurHandler}
                 value={enetredPassword}
             />
-            {passwordHasError && (<p className="error-text">pass error</p>)}
+            {passwordHasError && (<p className="error-text">Please enter a valid password!</p>)}
 
             <TextField
                 styles={rePasswordInputStyles}
@@ -152,14 +152,14 @@ const Signup = () => {
                 onBlur={rePasswordBlurHandler}
                 value={enetredRePassword}
             />
-            {rePasswordHasError && (<p className="error-text">pass error</p>)}
+            {rePasswordHasError && (<p className="error-text">Please enter a valid re-password!</p>)}
             <TextField
                 label="I agree to the Privacy Policy."
                 type="checkbox"
                 checked={checkPrivacy}
                 onChange={onCheckPrivacy}
             />
-            {checkPrivacyHasError &&  (<p className="error-text">Pleace check Provacy Policy!</p>)}
+            {checkPrivacyHasError &&  (<p className="error-text">Please check Privacy Policy!</p>)}
 
             <button disabled={isLoading} type="submit">Sign Up</button>
             <p>Alredy have an account?</p>

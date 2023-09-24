@@ -6,12 +6,13 @@ const StarRating = ({ reviews }) => {
     if (reviews && reviews.length!==0) {
 
         const sumAllProducRatings =reviews.reduce((currentRating, review) => {
-            return currentRating + review.rating
+            return currentRating + Number(review.rating)
         }, 0)
+        console.log(sumAllProducRatings,'reviews');
 
-        productRating = sumAllProducRatings /reviews.length;
+        productRating = (sumAllProducRatings /reviews.length).toFixed(2);
         goldStars = Array(Math.round(productRating)).fill(null);
-        blueStars = Array(5 - Math.round(productRating)).fill(null)
+        blueStars = Array(5 - goldStars.length).fill(null)
     }
 
     return (

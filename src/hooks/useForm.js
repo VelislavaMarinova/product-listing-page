@@ -26,6 +26,7 @@ const useForm = (validateValue) => {
         valueChangeHandler,
         inputBlurHandler,
         reset,
+        setEnteredValue
     };
 
 
