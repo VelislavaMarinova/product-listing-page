@@ -13,6 +13,7 @@ import CartProvider from "./store/cartProvider";
 import Signin from "./signin/Signin";
 import Signup from "./signup/Signup";
 import { AuthProvider } from "./store/auth-context";
+import AddReview from "./productList/AddReview";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -34,6 +35,7 @@ function App() {
           <Route path="/auth/signup" element={<Signup/>}></Route>
           <Route path="/categories/:category" element={<Category />}></Route>
           <Route path="/categories/:category/:id" element={<ProductDetails />}></Route>
+          <Route path="/categories/:category/:id/add-review" element={<AddReview></AddReview>}></Route>
           <Route path="*" element={<RouteError />}></Route>
         </Routes>
       </Main>

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import useFetch from "../hooks/useFetch";
 import StarRating from "./StarRating";
@@ -11,21 +11,32 @@ import { useAuth } from "../store/auth-context";
 
 const ProductDetails = () => {
     const { id } = useParams();
+    const navigate = useNavigate()
     const [showReview, setShowReview] = useState(false);
-    const [showAddReview, setShowAddReview] = useState(false);
-    const cartCtx=useContext(CartContext);
-    const {auth}=useAuth()
+    const[showMessage,setShowMessage]=useState(false)
+    const cartCtx = useContext(CartContext);
+    const { auth } = useAuth()
     console.log(id);
     const url = `http://localhost:3200/products/${id}?_embed=reviews`
     const { data, isLoading, error } = useFetch(url);
-    console.log(data);
-
+    // console.log(data);
+    console.log(data.reviews);
+    let userHasAddedReview = false
+    if (data.reviews && auth) {
+        userHasAddedReview = data.reviews.some(r => r.userId === auth.user.id)
+        console.log(userHasAddedReview, "userHasAddedReview");
+    }
     const onToggleReviews = () => {
+        // setReviews(data.reviews)
         setShowReview(prev => !prev)
     }
     const onAddReview = () => {
-        setShowAddReview(prev => !prev)
+        navigate('add-review')
     }
+    const onMessage=()=>{
+        setShowMessage(prev=>!prev)
+    }
+
     const addToCartHandler = (amount) => {
         cartCtx.addItem({
             id: data.id,
@@ -43,14 +54,15 @@ const ProductDetails = () => {
         <p>discountPercentage: {data.discountPercentage}</p>
         <img src={data.thumbnail} alt={data.title} />
         <StarRating reviews={data.reviews} />
-        {auth &&   <ProductItemForm onAddToCart={addToCartHandler} />}
+        {auth && <ProductItemForm onAddToCart={addToCartHandler} />}
         {auth && <button onClick={onToggleReviews}>{showReview ? 'Hide Review' : 'Show reviews'}</button>}
-        {auth && <button onClick={onAddReview}>Add review</button>}
-      
-        
-        
-        {showReview && <ProductReviews reviews={data.reviews}></ProductReviews>}
-        {showAddReview && <AddReview product={data}></AddReview>}
+        {auth && <button onClick={userHasAddedReview? onMessage:onAddReview} >Add Review</button>}
+        {showMessage && <p>You have alredy added review!</p>}
+
+
+
+        {showReview && <ProductReviews reviews={data.reviews} userHasAddedReview={userHasAddedReview}></ProductReviews>}
+
     </div>
 }
 export default ProductDetails;
